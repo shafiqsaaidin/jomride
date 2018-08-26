@@ -1,0 +1,7 @@
+{
+  "name": "JomRide",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
