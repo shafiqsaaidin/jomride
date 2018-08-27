@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+  
+  
+<ion-content padding>
+  <ion-item>
+    <ion-label stacked>Full name</ion-label>
+    <ion-input type="text" [(ngModel)]="user.name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Email</ion-label>
+    <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Phone</ion-label>
+    <ion-input type="number" [(ngModel)]="user.phone"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Gender</ion-label>
+    <ion-input type="text" [(ngModel)]="user.gender"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>Matric number</ion-label>
+    <ion-input type="text" [(ngModel)]="user.id"></ion-input>
+  </ion-item>
+  <br>
+  <button ion-button block (click)="addUser(user)">save</button>
+</ion-content>
+  

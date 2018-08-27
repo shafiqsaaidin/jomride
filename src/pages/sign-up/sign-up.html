@@ -1,0 +1,23 @@
+<ion-content padding>
+  <ion-card>
+    <ion-card-header color="primary">
+      REGISTER
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label floating>Enter your email</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label floating>Enter your password</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+      <br>
+      <button color="primary" ion-button block (click)="signUp(user)">Register</button>
+      <br>
+      <button navPush="SignInPage" ion-button clear block>back</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
