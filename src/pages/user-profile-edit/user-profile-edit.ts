@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { User } from "../../models/user.model";
-import { UserService } from '../../services/user/user.service';
+
 import { ToastService } from '../../services/toast/toast.service';
+import { Profile } from '../../models/profile';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @IonicPage()
@@ -12,25 +14,20 @@ import { ToastService } from '../../services/toast/toast.service';
   templateUrl: 'user-profile-edit.html',
 })
 export class UserProfileEditPage {
-  user: User = {
-    name: '',
-    email: '',
-    password: '',
-    phone: undefined,
-    gander: '',
-    id: '',
-  };
+  profile = {} as Profile;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private usrSrv: UserService,
+    private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
     private toast: ToastService) {
   }
 
-  addUser(user: User) {
-    this.usrSrv.addUser(user)
-      .then(ref => {
-        this.toast.show(`${user.name} added!`);
-      })
+  createProfile() {
+    this.afAuth.authState.take(1).subscribe(auth => {
+      this.db.object(`profile/${auth.uid}`).set(this.profile)
+        .then(() => this.navCtrl.setRoot('UserProfilePage'));
+    })
   }
 }

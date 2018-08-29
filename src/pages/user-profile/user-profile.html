@@ -8,5 +8,6 @@
 
 
 <ion-content padding>
-  this is profile page
+  <p>Username: {{(profileData | async)?.username}}</p>
+  <button navPush="UserProfileEditPage" ion-button>Edit</button>
 </ion-content>

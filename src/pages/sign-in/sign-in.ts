@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { User } from '../../models/user.model';
+import { User } from '../../models/user';
 
 @IonicPage()
 @Component({
@@ -10,10 +10,7 @@ import { User } from '../../models/user.model';
   templateUrl: 'sign-in.html',
 })
 export class SignInPage {
-  user: User = {
-    email: '',
-    password: '',
-  };
+  user = {} as User;
 
   constructor(
     public navCtrl: NavController, 
@@ -30,19 +27,13 @@ export class SignInPage {
     }).present();
   }
 
-  signIn(user: User) {
-    this.afAuth.auth.onAuthStateChanged(x => {
-      if (x) {
-        this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
-        .then(data => {
-          this.navCtrl.setRoot('UserHomePage');
-        })
-        .catch(error => {
-          this.alert(error.message);
-        })
-      } else {
-        console.log('user not logged in to system');
-      }
-    });
+  async signIn(user: User) {
+    try {
+      const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+      this.navCtrl.setRoot('UserTabsPage');
+    }
+    catch(e) {
+      this.alert(e);
+    }
   }
 }
