@@ -11,6 +11,7 @@ import { MyApp } from './app.component';
 import { FIREBASE_CONFIG } from '../app/firebase.credentials';
 import { UserService } from '../services/user/user.service';
 import { ToastService } from '../services/toast/toast.service';
+import { BookingService } from '../services/booking/booking.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ToastService } from '../services/toast/toast.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserService,
-    ToastService
+    ToastService,
+    BookingService
   ]
 })
 export class AppModule {}

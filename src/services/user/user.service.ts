@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
+import { NavController } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
-import { take } from 'rxjs/operators';
 
 import { User } from "../../models/user";
 import { Profile } from "../../models/profile";
-import { NavController } from "ionic-angular";
 
 
 @Injectable()
@@ -15,8 +14,8 @@ export class UserService {
   profile = {} as Profile;
 
   constructor(
-    private db: AngularFireDatabase,
     private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
     public navCtrl: NavController) {
 
     }
@@ -25,4 +24,17 @@ export class UserService {
     return this.userRef;
   }
 
+  createUserProfile() {
+    this.afAuth.authState.take(1).subscribe(auth => {
+      this.db.object(`profile/${auth.uid}`).set(this.profile)
+        .then(() => this.navCtrl.setRoot('UserProfilePage'));
+    })
+  }
+
+  updateUserProfile() {
+    this.afAuth.authState.take(1).subscribe(auth => {
+      this.db.object(`profile/${auth.uid}`).update(this.profile)
+        .then(() => this.navCtrl.setRoot('UserProfilePage'));
+    })
+  }
 }

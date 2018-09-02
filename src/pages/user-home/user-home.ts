@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 
-/**
- * Generated class for the UserHomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { BookingService } from '../../services/booking/booking.service';
+import { ToastService } from '../../services/toast/toast.service';
+
+import { Booking } from '../../models/booking';
 
 @IonicPage()
 @Component({
@@ -14,12 +13,38 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'user-home.html',
 })
 export class UserHomePage {
+  booking: Booking = {
+    from: '',
+    destination: '',
+    price: '',
+    type: '',
+    userId: '',
+    date: '',
+    status: ''
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private bookSrv: BookingService,
+    private afAuth: AngularFireAuth,
+    private toast: ToastService) {
+
+      this.afAuth.auth.onAuthStateChanged(user => {
+        if (user) {
+          this.booking = {
+            userId: this.afAuth.auth.currentUser.uid,
+            price: 'RM5',
+            date: Date.now().toString(),
+            status: 'pending'
+          }
+        } else {
+          this.navCtrl.setRoot('SignInPage');
+        }
+      });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserHomePage');
+  addBooking(booking: Booking) {
+    this.bookSrv.addBooking(booking);
   }
-
 }

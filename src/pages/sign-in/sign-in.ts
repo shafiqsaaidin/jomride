@@ -29,7 +29,7 @@ export class SignInPage {
 
   async signIn(user: User) {
     try {
-      const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+      this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
       this.navCtrl.setRoot('UserTabsPage');
     }
     catch(e) {

@@ -1,0 +1,14 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Records history</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item detail-push *ngFor="let list of record$ | async">
+    {{list.key}}
+  </ion-item>
+</ion-content>

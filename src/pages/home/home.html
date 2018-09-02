@@ -1,16 +1,15 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-content padding class="header">
+  <h1>JOM RIDE</h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block navPush="SignInPage">User Login</button>
+      </ion-col>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    <button ion-button navPush="SignInPage">Login</button>
-    <button ion-button navPush="UserProfileEditPage">user-profile</button>
-    <button ion-button navPush="UserTabsPage">Tabs</button>
-  </p>
+      <ion-col>
+        <button ion-button block navPush="SignInPage">Rider Login</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

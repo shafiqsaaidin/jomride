@@ -8,6 +8,29 @@
 
 
 <ion-content padding>
-  <p>Username: {{(profileData | async)?.username}}</p>
-  <button navPush="UserProfileEditPage" ion-button>Edit</button>
+  <ion-list>
+      <ion-item>
+        <img class="avatar" src="assets/imgs/user.png">
+        <p text-center>{{ (profileData | async)?.fullName }}</p>
+      </ion-item>
+      <ion-item>
+        <ion-label>Username: <span float-right>{{ (profileData | async)?.username }}</span></ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Gender: <span float-right>{{ (profileData | async)?.gender }}</span></ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Email: <span float-right>{{ (profileData | async)?.matricNumber }}</span></ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Phone: <span float-right>{{ (profileData | async)?.phone }}</span></ion-label>
+      </ion-item>
+      <br>
+      <button navPush="UserProfileEditPage" ion-button block (click)="editUserProfile(profileData)" navParams="{user: profileData}">Edit</button>
+
+      <button ion-button outline block (click)="logOut()">Log out</button>
+  </ion-list>
 </ion-content>

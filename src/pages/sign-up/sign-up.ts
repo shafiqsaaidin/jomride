@@ -29,7 +29,7 @@ export class SignUpPage {
 
   async signUp(user: User) {
     try {
-      const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+      await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
       this.alert('Register completed');
       this.navCtrl.setRoot('SignInPage');
     }

@@ -1,71 +1,42 @@
-<ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <button ion-item (click)="openPage(homePage)">
-        Home
-      </button>
-      <button ion-item (click)="openPage(friendsPage)">
-        Friends
-      </button>
-      <button ion-item (click)="openPage(eventsPage)">
-        Events
-      </button>
-      <button ion-item (click)="closeMenu()">
-        Close Menu
-      </button>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<ion-nav id="nav" #content [root]="UserHomePage"></ion-nav>
-
 <ion-header>
 
   <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Request Ride</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label floating><ion-icon name="pin"></ion-icon> From</ion-label>
-        <ion-select>
-          <ion-option value="tc">Taman Cempaka</ion-option>
-          <ion-option value="kamsis">Kamsis Baru</ion-option>
-          <ion-option value="kamsis">Kamsis Lama</ion-option>
-        </ion-select>
-      </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label floating><ion-icon name="pin"></ion-icon> From</ion-label>
+      <ion-select [(ngModel)]="booking.from">
+        <ion-option value="tc">Taman Cempaka</ion-option>
+        <ion-option value="kamsis">Kamsis Baru</ion-option>
+      </ion-select>
+    </ion-item>
 
-      <ion-item>
-        <ion-label floating><ion-icon name="pin"></ion-icon> To</ion-label>
-        <ion-select>
-          <ion-option value="tc">Taman Cempaka</ion-option>
-          <ion-option value="kamsis">Kamsis Baru</ion-option>
-          <ion-option value="kamsis">Kamsis Lama</ion-option>
-        </ion-select>
-      </ion-item>
+    <ion-item>
+      <ion-label floating><ion-icon name="pin"></ion-icon> Destination</ion-label>
+      <ion-select [(ngModel)]="booking.destination">
+        <ion-option value="tesco">Tesco --> RM5</ion-option>
+        <ion-option value="aeon">Aeon --> RM8</ion-option>
+        <ion-option value="amanjaya">Amanjaya --> RM10</ion-option>
+      </ion-select>
+    </ion-item>
 
-      <ion-item>
-        <ion-label floating><ion-icon name="swap"></ion-icon> Ride type</ion-label>
-        <ion-select>
-          <ion-option value="tc">Round</ion-option>
-          <ion-option value="one_way">One way</ion-option>
-        </ion-select>
-      </ion-item>
-      <br>
-      <button ion-button block color="primary">Request ride</button>
-    </ion-card-content>
-  </ion-card>
+    <ion-item>
+      <ion-label floating><ion-icon name="swap"></ion-icon> Ride type</ion-label>
+      <ion-select [(ngModel)]="booking.type">
+        <ion-option value="round">Round</ion-option>
+        <ion-option value="one way">One way</ion-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <button ion-button block color="primary" (click)="addBooking(booking)">Book ride</button>
+  </ion-list>
 </ion-content>
